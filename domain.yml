@@ -1,0 +1,136 @@
+version: '3.1'
+intents:
+- affirm
+- deny
+- greet
+- question_1
+- question_2
+- score
+- subjects
+- give_a_name
+- give_a_phone_number
+- yes
+- no
+entities:
+- SCORE
+- SUBJECT
+- SPECIALITY
+- DESCRIPTION
+- ONLY_BUDGET
+- RESULT
+- PHONE
+- NAME
+actions:
+- utter_ask_budget
+- utter_ask_score
+- action_find_recommendations
+- utter_greet
+- action_set_paid
+- utter_ask_subjects
+- utter_budget_and_platka
+- utter_recommendation
+- utter_results
+- action_set_budget
+- action_give_description
+- utter_feedback
+- utter_ask_about_consultation
+- action_personal_info_phone
+- action_personal_info_name
+- utter_ask_a_name
+- utter_ask_phone_number
+- utter_goodbye_1
+- utter_goodbye_2
+slots:
+  SUBJECT:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: SUBJECT
+  SCORE:
+    type: float
+    influence_conversation: false
+    min_value: 0
+    max_value: 500
+    mappings:
+    - type: from_entity
+      entity: SCORE
+  ONLY_BUDGET:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  SPECIALITY:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: SPECIALITY
+  DESCRIPTION:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: DESCRIPTION
+  RESULT:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: RESULT
+  PHONE:
+    type: text
+    influence_conversation: false
+
+    mappings:
+      - type: from_entity
+        entity: PHONE
+  NAME:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: NAME
+
+responses:
+  utter_greet:
+  - text: Привет, я чат-бот помощник для абитуриентов МИСИС. Я могу помочь выбрать тебе направления подготовки. Если интересно узнать про какую-то конкретную специальность, укажи код направления.
+  utter_ask_subjects:
+  - text: Не переживай, сейчас разберемся :) Какие предметы у тебя сданы?
+  utter_ask_score:
+  - text: Какая у тебя сумма баллов?
+  utter_ask_budget:
+  - text: Ты рассматриваешь вариант платного обучения?
+  utter_budget_and_platka:
+  - text: Хорошо, сейчас подберу для тебя несколько вариантов, куда ты сможешь поступить либо на бюджет, либо на платное обучение.
+  utter_only_budget:
+  - text: Хорошо, подберу для тебя варианты поступления только на бюджет.
+  utter_recommendation:
+  - text: 'Основываясь на предметах и балле, подбираем подходящие направления...'
+  utter_results:
+  - text: '{RESULT}'
+  utter_deny:
+  - text: К сожалению, подходящих направлений для тебя нет.
+  utter_description_specialty:
+  - text: '{DESCRIPTION}'
+  utter_feedback:
+  - text: Если остались еще какие-то вопросы, то оставь свое имя и номер телефона. Работник приемной комиссии МИСИС перезвонит тебе.
+  utter_ask_about_consultation:
+  - text: "Перезвонить Вам?"
+    buttons:
+    - title:  Да
+      payload: /yes
+    - title:  Закончить работу чат-бота
+      payload: /no
+  utter_ask_a_name:
+  - text: "Введи свое имя:"
+  utter_ask_phone_number:
+  - text: "Введи свой номер телефона:"
+  utter_goodbye_1:
+  - text: До свидания! Удачи в поступлении!
+  utter_goodbye_2:
+  - text: "Хорошо, {NAME}, мы перезвоним тебе в течении дня по этому номеру: {PHONE}. До свидания!"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

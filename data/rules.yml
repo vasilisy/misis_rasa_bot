@@ -1,0 +1,73 @@
+version: "3.1"
+
+rules:
+
+- rule: приветствие
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: спрашивать про предметы
+  steps:
+    - intent: question_1
+    - action: utter_ask_subjects
+
+- rule: спрашивать про баллы
+  steps:
+    - intent: subjects
+    - action: utter_ask_score
+
+- rule: спроси про бюджет
+  steps:
+    - action: utter_ask_score
+    - intent: score
+    - action: utter_ask_budget
+
+- rule: платка
+  steps:
+    - intent: affirm
+    - action: action_set_paid
+    - action: utter_budget_and_platka
+    - action: utter_recommendation
+    - action: action_find_recommendations
+    - action: utter_results
+
+- rule: бюджет
+  steps:
+    - intent: deny
+    - action: action_set_budget
+    - action: utter_only_budget
+    - action: utter_recommendation
+    - action: action_find_recommendations
+    - action: utter_results
+
+
+- rule: специальность
+  steps:
+    - intent: question_2
+    - action: action_give_description
+    - action: utter_description_specialty
+    - action: utter_feedback
+    - action: utter_ask_about_consultation
+
+- rule: обратная связь не нужна
+  steps:
+    - intent: no
+    - action: utter_goodbye_1
+
+- rule: обратная связь нужна_1
+  steps:
+    - intent: yes
+    - action: utter_ask_a_name
+
+- rule: обратная связь нужна_2
+  steps:
+    - intent: give_a_name
+    - action: action_personal_info_name
+    - action: utter_ask_phone_number
+
+- rule: обратная связь нужна_3
+  steps:
+    - intent: give_a_phone_number
+    - action: action_personal_info_phone
+    - action: utter_goodbye_2

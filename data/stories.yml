@@ -1,0 +1,83 @@
+version: "3.1"
+
+stories:
+
+- story: main story
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: question_1
+  - action: utter_ask_subjects
+  - intent: subjects
+  - action: utter_ask_score
+  - intent: score
+  - action: utter_ask_budget
+  - intent: affirm
+  - action: action_set_paid
+  - action: utter_budget_and_platka
+  - action: utter_recommendation
+  - action: action_find_recommendations
+  - action: utter_results
+  - intent: question_2
+  - action: action_give_description
+  - action: utter_description_specialty
+  - action: utter_feedback
+  - action: utter_ask_about_consultation
+  - intent: yes
+  - action: utter_ask_a_name
+  - intent: give_a_name
+  - action: action_personal_info_name
+  - action: utter_ask_phone_number
+  - intent: give_a_phone_number
+  - action: action_personal_info_phone
+  - action: utter_goodbye_2
+
+- story: only budget story
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: question_1
+  - action: utter_ask_subjects
+  - intent: subjects
+  - action: utter_ask_score
+  - intent: score
+  - action: utter_ask_budget
+  - intent: deny
+  - action: action_set_budget
+  - action: utter_only_budget
+  - action: utter_recommendation
+  - action: action_find_recommendations
+  - action: utter_results
+
+
+- story: only describe specialization, no feedback
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: question_2
+  - action: action_give_description
+  - action: utter_description_specialty
+  - action: utter_feedback
+  - action: utter_ask_about_consultation
+  - intent: no
+  - action: utter_goodbye_1
+
+
+- story: only describe specialization, call later
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: question_2
+  - action: action_give_description
+  - action: utter_description_specialty
+  - action: utter_feedback
+  - action: utter_ask_about_consultation
+  - intent: yes
+  - action: utter_ask_a_name
+  - intent: give_a_name
+  - action: action_personal_info_name
+  - action: utter_ask_phone_number
+  - intent: give_a_phone_number
+  - action: action_personal_info_phone
+  - action: utter_goodbye_2
+
